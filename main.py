@@ -3,6 +3,7 @@ import turtle
 
 BACKGROUND_FILE_PATH = "assets/blank_states_img.gif"
 DATA_FILE_PATH = "assets/50_states.csv"
+MISSED_STATES_FILE_PATH = "assets/missed_states.csv"
 
 def read_data(file_path: str): 
     return pandas.read_csv(file_path)
@@ -40,6 +41,9 @@ def main():
             write_guess_to_map(guess, int(df[df["state"] == guess]["x"].item()), int(df[df["state"] == guess]["y"].item()))
             df.drop(df[df["state"] == guess].index, inplace=True)
             score += 1
+        if score == 50 or guess.lower() == "exit": 
+            game_on = False
+            df.to_csv(MISSED_STATES_FILE_PATH)
 
 if __name__ == "__main__":
     main()
