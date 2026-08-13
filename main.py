@@ -43,7 +43,7 @@ def main():
             score += 1
         if score == 50 or guess.lower() == "exit": 
             game_on = False
-            df.to_csv(MISSED_STATES_FILE_PATH)
+            df.to_csv(MISSED_STATES_FILE_PATH, columns=["state"], index=False)
 
 if __name__ == "__main__":
     main()
